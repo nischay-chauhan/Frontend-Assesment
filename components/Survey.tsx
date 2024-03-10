@@ -1,4 +1,3 @@
-// Survey.tsx
 import React, { useState } from "react";
 import { saveAnswer, getQuestions } from "@/utils/localStorage";
 import { TQuestion } from "@/data/questions";

@@ -1,4 +1,3 @@
-// Questions.tsx
 import React, { useEffect, useState } from "react";
 import { TQuestion } from "../data/questions";
 

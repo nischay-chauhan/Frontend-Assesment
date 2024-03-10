@@ -1,4 +1,3 @@
-'use client'
 import { Questionsabc, TQuestion } from "@/data/questions";
 
 const QUESTIONS_KEY = 'Survey-Questions';
@@ -15,13 +14,24 @@ export const getQuestions = () : TQuestion[] => {
     }
 };
 
-export const saveAnswer = (questionId : number , answer : string | number) => {
-    const answers = JSON.parse(localStorage.getItem(ANSWERS_KEY) || '{}');
-    answers[questionId] = answer;
-    localStorage.setItem(ANSWERS_KEY, JSON.stringify(answers));
-}
+export const saveAnswer = (questionId: number, answer: string | number) => {
+    if (typeof window !== 'undefined') {
+        const storedAnswers = localStorage.getItem(ANSWERS_KEY);
+        const answers = storedAnswers ? JSON.parse(storedAnswers) : {};
+        answers[questionId] = answer;
+        localStorage.setItem(ANSWERS_KEY, JSON.stringify(answers));
+    } else {
+        console.error('Cannot access localStorage on the server.');
+    }
+};
 
-export const getAnswers = (): Record<string, string | number> => {
-    const storedAnswers = localStorage.getItem(ANSWERS_KEY);
-    return storedAnswers ? JSON.parse(storedAnswers) : {};
+
+export const getAnswers = () => {
+    if (typeof window !== 'undefined') {
+        const storedAnswers = localStorage.getItem(ANSWERS_KEY);
+        return storedAnswers ? JSON.parse(storedAnswers) : {};
+    } else {
+        console.error('Cannot access localStorage on the server.');
+        return {};
+    }
 };
