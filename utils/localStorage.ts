@@ -1,3 +1,4 @@
+'use client'
 import { Questionsabc, TQuestion } from "@/data/questions";
 
 const QUESTIONS_KEY = 'Survey-Questions';
